@@ -90,7 +90,7 @@ object FileManager {
       terrasse
   }
 
-  def createJson(terrasse: Terrasse): String {
+  def createJson(terrasse: Terrasse): String = {
     ""
   }
 

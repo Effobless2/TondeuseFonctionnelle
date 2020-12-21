@@ -1,6 +1,10 @@
 import fileManager.FileManager;
 
 package projetal2020 {
+
+  import fileManager.DonneesIncorectesException
+  import projetal2020.Main.x
+
   object Main extends App {
     println("Ici le programme principal")
     // Le code suivant ne compilera pas.
@@ -11,30 +15,35 @@ package projetal2020 {
     val x = System.getProperty("user.dir");
     println(x);
 
-    val myTerrasse = fileManager.FileManager.getFromFile(x.concat("\\tondeuses\\1.txt"))
-    println(myTerrasse);
-    println(myTerrasse.width)
-    println(myTerrasse.height)
+    try {
+      val myTerrasse = fileManager.FileManager.getFromFile(x.concat("\\tondeuses\\1.txt"))
+      println(myTerrasse);
+      println(myTerrasse.width)
+      println(myTerrasse.height)
 
-    myTerrasse.tondeuses.map(x => {
-      println(x.getPos())
-      println(x.getOrientation())
-      println(x.getMoves())
-      println(x.getTerrasse())
-    })
+      myTerrasse.tondeuses.map(x => {
+        println(x.getPos())
+        println(x.getOrientation())
+        println(x.getMoves())
+        println(x.getTerrasse())
+      })
 
-    myTerrasse.start()
+      myTerrasse.start()
 
-    println("Ended")
-    println(myTerrasse.width)
-    println(myTerrasse.height)
+      println("Ended")
+      println(myTerrasse.width)
+      println(myTerrasse.height)
 
-    myTerrasse.tondeuses.map(x => {
-      println(x.getPos())
-      println(x.getOrientation())
-      println(x.getMoves())
-      println(x.getTerrasse())
-    })
+      myTerrasse.tondeuses.map(x => {
+        println(x.getPos())
+        println(x.getOrientation())
+        println(x.getMoves())
+        println(x.getTerrasse())
+      })
+    } catch {
+      case _: DonneesIncorectesException => println("Fichier Incorrecte")
+    }
   }
+
 }
 
