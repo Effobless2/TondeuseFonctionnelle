@@ -9,16 +9,18 @@ package models{
     def turnLeft()
     def turnRight()
     def setPositions(x: Int, y: Int)
-    def getPos(): (Int, Int)
+    def getPos: (Int, Int)
     def startMoving()
-    def getOrientation(): Char
-    def getMoves(): List[Char]
-    def getInitialPlaces(): (Int, Int)
+    def getOrientation: Char
+    def getMoves: String
+    def getInitialPlaces: (Int, Int)
+    def getInitialOrientation: Char
   }
 
-  class Tondeuse(var x: Int, var y: Int, var orientation: Char, movements: List[Char], terrasse: Terrasse) extends Movable {
+  class Tondeuse(var x: Int, var y: Int, var orientation: Char, movements: String, terrasse: Terrasse) extends Movable {
     val firstX = x
     val firstY = y
+    val firstDir = orientation
 
     override def startMoving(): Unit = {
       @tailrec
@@ -29,7 +31,7 @@ package models{
           helper(tail)
         }
       }
-      helper(movements)
+      helper(movements.toCharArray.toList)
     }
 
     def treatNextInput(input: Char): Unit = input match {
@@ -64,15 +66,17 @@ package models{
       y = posY
     }
 
-    override def getPos(): (Int, Int) = (x, y)
+    override def getPos: (Int, Int) = (x, y)
 
-    override def getOrientation(): Char = orientation
+    override def getOrientation: Char = orientation
 
-    override def getMoves(): List[Char] = movements
+    override def getMoves: String = movements
 
     override def getTerrasse(): Terrasse = terrasse
 
-    override def getInitialPlaces(): (Int, Int) = (firstX, firstY)
+    override def getInitialPlaces: (Int, Int) = (firstX, firstY)
+
+    override def getInitialOrientation: Char = firstDir
   }
 
   class Terrasse(var height: Int, var width: Int, var tondeuses: List[Movable]){
@@ -88,7 +92,7 @@ package models{
       @tailrec
       def mapTondeusesHelper(list: List[Movable]): Boolean = list match {
         case Nil => true
-        case head::tail => head.getPos() != (x,y) && mapTondeusesHelper(tail)
+        case head::tail => head.getPos != (x,y) && mapTondeusesHelper(tail)
       }
       x >= 0 && y >= 0 && x < width && y < height
     }

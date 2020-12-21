@@ -1,6 +1,7 @@
 package fileManager
 
 import better.files.File
+import play.api.libs.json.{JsValue}
 import models.{Terrasse, Tondeuse}
 
 import scala.annotation.tailrec;
@@ -37,7 +38,7 @@ object FileManager {
                     currentTondeusePosX,
                     currentTondeusePosY,
                     currentTondeuseOrientation,
-                    lineToList(0).toCharArray.toList,
+                    lineToList(0),
                     terrasse)
                 )
               }
@@ -90,8 +91,10 @@ object FileManager {
       terrasse
   }
 
-  def createJson(terrasse: Terrasse): String = {
-    ""
+  def createJson(terrasse: Terrasse): JsValue = {
+
+    val result = TerrasseJSON.w.writes(TerrasseJSON(terrasse))
+    result
   }
 
 }
