@@ -1,7 +1,8 @@
 package fileManager
 
 import better.files.File
-import play.api.libs.json.{JsValue}
+import fileManager.Json.TerrasseJSON
+import play.api.libs.json.JsValue
 import models.{Terrasse, Tondeuse}
 
 import scala.annotation.tailrec;
