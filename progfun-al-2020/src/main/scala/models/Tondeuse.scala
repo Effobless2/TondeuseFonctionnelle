@@ -1,8 +1,15 @@
 package models
 
-  import scala.annotation.tailrec
+import scala.annotation.tailrec
 
-class Tondeuse(var x: Int, var y: Int, var orientation: Char, movements: String, terrasse: Terrasse) extends Movable {
+@SuppressWarnings(Array("org.wartremover.warts.Var"))
+class Tondeuse(
+    var x: Int,
+    var y: Int,
+    var orientation: Char,
+    movements: String,
+    terrasse: Terrasse
+) extends Movable {
   val firstX = x
   val firstY = y
   val firstDir = orientation
@@ -11,7 +18,7 @@ class Tondeuse(var x: Int, var y: Int, var orientation: Char, movements: String,
     @tailrec
     def helper(nextMoves: List[Char]): Unit = nextMoves match {
       case Nil => {}
-      case head::tail => {
+      case head :: tail => {
         treatNextInput(head)
         helper(tail)
       }
@@ -26,10 +33,10 @@ class Tondeuse(var x: Int, var y: Int, var orientation: Char, movements: String,
   }
 
   override def move(): (Int, Int) = orientation match {
-    case 'N' => (x, y+1);
-    case 'S' => (x, y-1);
-    case 'W' => (x-1, y);
-    case 'E' => (x+1, y);
+    case 'N' => (x, y + 1);
+    case 'S' => (x, y - 1);
+    case 'W' => (x - 1, y);
+    case 'E' => (x + 1, y);
   }
 
   override def turnLeft(): Unit = orientation match {
@@ -63,7 +70,3 @@ class Tondeuse(var x: Int, var y: Int, var orientation: Char, movements: String,
 
   override def getInitialOrientation: Char = firstDir
 }
-
-
-
-

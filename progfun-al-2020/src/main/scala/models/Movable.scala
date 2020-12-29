@@ -4,11 +4,11 @@ trait Movable {
   def getTerrasse(): Terrasse
 
   def move(): (Int, Int)
-  def turnLeft()
-  def turnRight()
-  def setPositions(x: Int, y: Int)
+  def turnLeft(): Unit
+  def turnRight(): Unit
+  def setPositions(x: Int, y: Int): Unit
   def getPos: (Int, Int)
-  def startMoving()
+  def startMoving(): Unit
   def getOrientation: Char
   def getMoves: String
   def getInitialPlaces: (Int, Int)

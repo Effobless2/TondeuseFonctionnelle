@@ -9,7 +9,8 @@ package projetal2020 {
     val x = System.getProperty("user.dir");
 
     try {
-      val myTerrasse = fileManager.FileManager.getFromFile(x.concat("\\tondeuses\\1.txt"))
+      val myTerrasse =
+        fileManager.FileManager.getFromFile(x.concat("\\tondeuses\\1.txt"))
       println("File Read")
       println("Begin")
 
@@ -23,4 +24,3 @@ package projetal2020 {
   }
 
 }
-
